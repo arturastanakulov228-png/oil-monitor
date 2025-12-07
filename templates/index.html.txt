@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нефтяной монитор России</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 { 
+            text-align: center; 
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            color: #FFD700;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .card h2 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        .price {
+            font-size: 2.2em;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .stock-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .stock-row:last-child {
+            border-bottom: none;
+        }
+        .stock-name {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .stock-price {
+            font-size: 1.3em;
+            color: #90EE90;
+        }
+        .update-time {
+            text-align: center;
+            margin-top: 30px;
+            color: #ADD8E6;
+            font-size: 0.9em;
+        }
+        .disclaimer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8em;
+            color: #CCC;
+            opacity: 0.8;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            h1 { font-size: 1.8em; }
+            .price { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛢️ Нефтяной монитор России</h1>
+        
+        <div class="card">
+            <h2>Цена на нефть Brent</h2>
+            <div class="price">{{ oil_price }}</div>
+        </div>
+        
+        <div class="card">
+            <h2>Акции нефтяных компаний</h2>
+            {% for name, price in stocks.items() %}
+            <div class="stock-row">
+                <span class="stock-name">{{ name }}</span>
+                <span class="stock-price">{{ price }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="update-time">
+            📅 Последнее обновление: {{ update_time }}
+        </div>
+        
+        <div class="disclaimer">
+            ℹ️ Информация предоставляется в ознакомительных целях.<br>
+            Данные обновляются автоматически с Yahoo Finance.
+        </div>
+    </div>
+</body>
+</html>
